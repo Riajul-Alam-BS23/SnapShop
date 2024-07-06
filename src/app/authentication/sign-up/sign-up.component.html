@@ -1,0 +1,207 @@
+<div class="container d-flex flex-wrap" (click)="onClick()">
+  <div
+    class="image-section col-md-6 d-flex justify-content-center align-items-center py-5"
+  >
+    <img src="assets/shopping-image.png" alt="Sign Up" />
+  </div>
+  <div *ngIf="showConfirmationMessage" class="confirmation-overlay">
+    <div class="alert alert-success" role="alert">
+      Form submitted successfully!
+    </div>
+  </div>
+  <div
+    class="mt-4 form-section col-md-6 card border shadow p-4 rounded"
+    [class.blurred]="showConfirmationMessage"
+  >
+    <h2 class="card-title text-center mb-4">Sign Up</h2>
+    <p class="text-center mb-4">Enter your details below</p>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="First Name"
+            formControlName="firstName"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="Last Name"
+            formControlName="lastName"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          signUpForm.get('firstName').invalid &&
+          signUpForm.get('firstName').touched
+        "
+        class="text-danger mt-2"
+      >
+        First Name is required!
+      </div>
+
+      <div class="row g-3 my-3">
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="City"
+            formControlName="city"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="Street"
+            formControlName="street"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <div
+        *ngIf="signUpForm.get('city').invalid && signUpForm.get('city').touched"
+        class="text-danger mt-2"
+      >
+        City is required!
+      </div>
+
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="Zip Code"
+            formControlName="zipCode"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="Geo location"
+            formControlName="geoLocation"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          signUpForm.get('zipCode').invalid && signUpForm.get('zipCode').touched
+        "
+        class="text-danger mt-2"
+      >
+        Zip Code is required!
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          class="form-control"
+          required
+        />
+        <div
+          *ngIf="
+            signUpForm.get('email').invalid && signUpForm.get('email').touched
+          "
+          class="text-danger mt-2"
+        >
+          Valid email is required!
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="text"
+          placeholder="User Name"
+          formControlName="username"
+          class="form-control"
+          required
+        />
+        <div
+          *ngIf="
+            signUpForm.get('username').hasError('whitespace') &&
+            signUpForm.get('username').touched
+          "
+          class="text-danger mt-2"
+        >
+          Username cannot contain spaces!
+        </div>
+        <div
+          *ngIf="
+            signUpForm.get('username').invalid &&
+            signUpForm.get('username').touched &&
+            signUpForm.get('username').hasError('required')
+          "
+          class="text-danger mt-2"
+        >
+          Username is required!
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          class="form-control"
+          required
+        />
+        <div
+          *ngIf="
+            signUpForm.get('password').invalid &&
+            signUpForm.get('password').touched
+          "
+          class="text-danger mt-2"
+        >
+          Password must be at least 6 characters long!
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+          class="form-control"
+          required
+        />
+        <div
+          *ngIf="signUpForm.get('confirmPassword').hasError('passwordMismatch')"
+          class="text-danger mt-2"
+        >
+          Password and confirm password do not match!
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="signUpForm.invalid"
+        >
+          Sign Up
+        </button>
+      </div>
+    </form>
+    <div class="bottom text-center mt-4">
+      <p style="color: var(--button-color)">
+        Already have an account?<a
+          style="color: var(--button-color)"
+          [routerLink]="['/login']"
+          ><span>Log In</span></a
+        >
+      </p>
+    </div>
+  </div>
+</div>

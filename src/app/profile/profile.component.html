@@ -1,0 +1,269 @@
+<div class="container">
+  <div class="breadcrumb"><a [routerLink]="['']">Home</a> / My Account</div>
+  <div class="welcome-message">
+    Welcome!
+    <span class="username">{{
+      loggedInUser.name.firstname | capitalizeFirst
+    }}</span>
+  </div>
+  <div class="content">
+    <div class="sidebar">
+      <h3>Account</h3>
+      <ul class="sidebar-menu">
+        <li
+          [class.active]="activeTab === 'profile'"
+          (click)="setActiveTab('profile')"
+        >
+          My Profile
+        </li>
+        <li
+          [class.active]="activeTab === 'order'"
+          (click)="setActiveTab('order')"
+        >
+          Order History
+        </li>
+      </ul>
+    </div>
+    <div class="profile-content" *ngIf="activeTab === 'profile'">
+      <h3>Edit Your Profile</h3>
+      <form [formGroup]="profileForm" (ngSubmit)="onSaveChanges()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" formControlName="firstName" />
+            <!-- Updated syntax for error message -->
+            <div
+              *ngIf="profileForm.get('firstName').errors?.['required'] && profileForm.get('firstName').touched"
+              class="text-danger"
+            >
+              First name is required
+            </div>
+            <div
+              *ngIf="
+                profileForm.get('firstName').hasError('hasNumber') &&
+                profileForm.get('firstName').dirty
+              "
+              class="text-danger"
+            >
+              First name cannot contain numbers
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" formControlName="lastName" />
+            <!-- Updated syntax for error message -->
+            <div
+              *ngIf="profileForm.get('lastName').errors?.['required'] && profileForm.get('lastName').touched"
+              class="text-danger"
+            >
+              Last name is required
+            </div>
+            <div
+              *ngIf="
+                profileForm.get('lastName').hasError('hasNumber') &&
+                profileForm.get('lastName').dirty
+              "
+              class="text-danger"
+            >
+              Last name cannot contain numbers
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" />
+            <!-- Updated syntax for error message -->
+            <div
+              *ngIf="profileForm.get('email').errors?.['required'] && profileForm.get('email').touched"
+              class="text-danger"
+            >
+              Email is required
+            </div>
+            <div
+              *ngIf="profileForm.get('email').errors?.['email'] && profileForm.get('email').touched"
+              class="text-danger"
+            >
+              Please enter a valid email address
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" formControlName="address" />
+            <!-- Updated syntax for error message -->
+            <div
+              *ngIf="profileForm.get('address').errors?.['required'] && profileForm.get('address').touched"
+              class="text-danger"
+            >
+              Address is required
+            </div>
+            <!-- Updated syntax for error message -->
+          </div>
+        </div>
+        <h4>Password Changes</h4>
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="currentPassword"></label>
+            <input
+              type="password"
+              id="currentPassword"
+              formControlName="currentPassword"
+              placeholder="Current Password"
+            />
+            <label for="newPassword"></label>
+            <input
+              type="password"
+              id="newPassword"
+              formControlName="newPassword"
+              placeholder="New Password"
+            />
+            <label for="confirmNewPassword"></label>
+            <input
+              type="password"
+              id="confirmNewPassword"
+              formControlName="confirmNewPassword"
+              placeholder="Confirm New Password"
+            />
+          </div>
+        </div>
+        <!-- Display form errors here if any -->
+        <div *ngIf="profileForm.errors" class="text-danger">
+          Please correct the errors before saving.
+        </div>
+        <!-- Display form errors here if any -->
+        <div *ngIf="profileForm.errors" class="text-danger">
+          Please correct the errors before saving.
+        </div>
+        <div class="form-row buttons">
+          <button type="button" class="btn-cancel">Cancel</button>
+          <button
+            type="submit"
+            class="btn-save"
+            [disabled]="!profileForm.valid"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!--  Address Book -->
+    <div
+      class="addressBook-content d-flex justify-content-center align-items-center"
+      *ngIf="activeTab === 'order'"
+    >
+      <div *ngIf="orderList?.length > 0; else noOrders" class="container">
+        <button class="btn btn-danger" (click)="onClearHistory()">
+          Clear History
+        </button>
+        <h2 class="order-info-header mb-4 text-center">Order Information</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4 scrollable-list">
+          <div class="col-md-10 mx-auto" *ngFor="let order of orderList">
+            <div class="card h-100 shadow-sm bg-light mx-auto">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <ul class="list-group list-group-flush mb-0">
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    <strong>Order ID:</strong> {{ order.orderId }}
+                  </li>
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    <strong>Order Date:</strong> {{ order.orderDate }}
+                  </li>
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    <strong>Current Status:</strong>
+                    <span class="badge bg-primary">{{
+                      order.orderStatus
+                    }}</span>
+                  </li>
+                </ul>
+                <button
+                  class="btn btn-primary mt-3"
+                  (click)="showOrderDetails(order)"
+                >
+                  Show Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noOrders>
+        <p class="text-muted">No order information available.</p>
+      </ng-template>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="orderDetailsModal"
+      tabindex="100"
+      aria-labelledby="orderDetailsModalLabel"
+      aria-hidden="false"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderDetailsModalLabel">
+              Order Details
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Order ID:</strong> {{ currentActiveOrder?.orderId }}</p>
+            <p>
+              <strong>Order Date:</strong> {{ currentActiveOrder?.orderDate }}
+            </p>
+            <p>
+              <strong>Current Status:</strong>
+              {{ currentActiveOrder?.orderStatus }}
+            </p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of currentActiveOrder?.products">
+                  <td>
+                    <img
+                      [src]="product.image"
+                      alt="{{ product.name }}"
+                      class="img-thumbnail"
+                      width="50"
+                    />
+                  </td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.quantity }}</td>
+                  <td>{{ product.price  }}$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

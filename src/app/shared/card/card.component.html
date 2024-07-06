@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+<ng-container *ngIf="!cardInfo; else cardContent">
+  <app-loading-spinner></app-loading-spinner>
+</ng-container>
+
+<ng-template #cardContent>
+  <div class="col-sm-3 card1">
+    <div class="thumb-wrapper">
+      <div class="topsectionforcart">
+        <span class="wish-icon discount">
+          <button class="discountbutton">-{{ cardInfo.discount }}%</button>
+        </span>
+        <span class="wish-icon"><i class="ri-heart-3-line"></i></span>
+      </div>
+
+      <div class="img-box">
+        <img src="{{ cardInfo.image }}" class="img-fluid" alt="Watch" />
+        <div class="addToCart" (click)="onClickCart()">
+          <i class="ri-shopping-cart-2-line"></i>
+          <a>Add to Cart</a>
+        </div>
+      </div>
+      <div class="thumb-content">
+        <h4 (click)="onClickDetails(cardInfo.id)">{{ cardInfo.title }}</h4>
+        <p class="item-price">
+          <span>${{ cardInfo.price }} </span>
+        </p>
+        <div class="star-rating">
+          <ul class="list-inline">
+            <li class="list-inline-item" *ngFor="let star of ratingArray">
+              <i
+                class="fa"
+                [ngClass]="{
+                  'fa-star': star === 'full',
+                  'fa-star-half-alt': star === 'half',
+                  'fa-star-o': star === 'empty'
+                }"
+              ></i>
+            </li>
+            <li class="list-inline-item count">
+              ({{ cardInfo.rating.count }})
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

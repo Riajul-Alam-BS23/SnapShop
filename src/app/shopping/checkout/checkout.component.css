@@ -1,0 +1,102 @@
+.order-summary .payment-methods {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.order-summary .payment-methods img {
+  width: 50px;
+}
+#couponCode {
+  width: 20vw;
+}
+.form-control {
+  border-radius: 0 !important;
+  border: none !important;
+  background-color: #f5f5f5;
+  box-shadow: none !important;
+}
+.card {
+  border: none btn;
+}
+#save-info:checked {
+  background-color: rgb(201, 62, 7);
+  border: none;
+}
+.d-flex img {
+  transition: 0.3s;
+}
+.d-flex img:hover {
+  transform: scale(1.25);
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red !important;
+}
+.form-text {
+  color: red;
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background-color: #db4444;
+  box-shadow: none;
+  border: none;
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+.btn {
+  background-color: var(--button-color) !important;
+  box-shadow: none !important;
+}
+
+.btn:hover {
+  scale: 1.04 !important;
+  transition: 0.4s !important;
+}
+
+/* Style for table*/
+
+.fixed-height-table {
+  display: block; /* Enables overflow to work on tbody */
+  max-height: 300px; /* Set the fixed height you desire */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.fixed-height-table thead,
+.fixed-height-table tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.fixed-height-table th,
+.fixed-height-table td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  height: 50px; /* Set the fixed height for table rows */
+  line-height: 50px; /* Center align text vertically */
+}
+
+/* Style for the error message */
+.error-messages {
+  color: #db4444;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+#subtotal,
+#shipping,
+#total,
+#discount {
+  text-align: right;
+}
+
+/* card */
+.card {
+  border: none;
+  box-shadow: none;
+}

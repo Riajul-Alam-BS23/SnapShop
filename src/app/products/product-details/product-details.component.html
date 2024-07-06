@@ -1,0 +1,207 @@
+<ng-container *ngIf="isLoading;else otherWise">
+  <app-loading-spinner></app-loading-spinner>
+</ng-container>
+<ng-template #otherWise>
+
+
+<div class="container">
+  <div class="ms-3">
+    <div class="row my-5 pt-3">
+      <div class="col-xs-6">
+        <a [routerLink]="['/home']" class="breadcrumb-link">home</a> /
+        <a [routerLink]="['/product-list']" class="breadcrumb-link">products</a>
+        {{ breadcrumbPath }}
+      </div>
+
+      <div
+        class="div"
+        *ngIf="
+          !selectedProductDetails && starLoad;
+          else definedSelect
+        "
+      ></div>
+
+      <ng-template #definedSelect>
+        <div class="card mb-3" style="max-width: 80vw">
+          <div class="row g-0">
+            <div class="col-md-6 img-parent">
+              <img
+                src="{{ selectedProductDetails.image }}"
+                alt="Gaming pad"
+                class="img-fluid rounded-start"
+              />
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <h5 class="card-title">{{ selectedProductDetails.title }}</h5>
+                <div class="card-text">
+                  <div class="d-flex">
+                    <div class="star-rating">
+                      <ul class="list-inline">
+                        <li
+                          class="list-inline-item"
+                          *ngFor="let star of ratingArray"
+                        >
+                          <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-star': star === 'full',
+                              'fa-star-half-alt': star === 'half',
+                              'fa-star-o': star === 'empty'
+                            }"
+                            style="color: #fca32e"
+                          ></i>
+                        </li>
+                        <li class="list-inline-item count">
+                          ({{ selectedProductDetails.rating.count }})
+                        </li>
+                      </ul>
+                    </div>
+
+                    <pre> | </pre>
+                    <span style="color: rgb(42, 250, 170)">In stock</span>
+                  </div>
+                  <div class="card-text mb-3">
+                    ${{ selectedProductDetails.price }}
+                  </div>
+                  <div class="card-text mb-3">
+                    {{ selectedProductDetails.description }}
+                    <hr />
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <div class="d-flex flex-wrap align-items-center">
+                        <span>Size:</span>
+                        <ng-container *ngFor="let size of sizes">
+                          <div
+                            class="form-check form-check-inline custom-space-between-each-size"
+                          >
+                            <input
+                              type="radio"
+                              class="btn-check"
+                              name="tShirtSize"
+                              id="{{ size }}"
+                              [value]="size"
+                              [(ngModel)]="selectedSize"
+                            />
+                            <label
+                              class="button-design"
+                              [ngClass]="{
+                                'btn-outline-colored': size === selectedSize,
+                                'btn-outline-secondary': size !== selectedSize
+                              }"
+                              for="{{ size }}"
+                            >
+                              {{ size }}
+                            </label>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <div class="input-group mb-3">
+                        <button
+                          class="btn btn-outline-secondary"
+                          type="button"
+                          (click)="decrement()"
+                          [disabled]="amount === 1"
+                        >
+                          -
+                        </button>
+                        <input
+                          type="text"
+                          class="input-width form-control text-center"
+                          [(ngModel)]="amount"
+                          min="1"
+                        />
+                        <button
+                          class="btn btn-outline-secondary"
+                          type="button"
+                          (click)="increment()"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        class="btn btn-outline-colored"
+                        style="margin-left: 7vw"
+                        (click)="onClickCart()"
+                      >
+                        <i class="fas fa-cart-plus"></i>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        class="btn btn-outline-colored"
+                        style="width: 10vw"
+                        (click)="onBuyItem()"
+                      >
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row border-bottom pb-3 card-border">
+                        <div class="col">
+                          <div class="d-flex align-items-center">
+                            <i class="me-2 ri-truck-line h3"></i>
+                            <span class="h5">Free Delivery</span>
+                          </div>
+                          <p
+                            style="text-decoration: underline"
+                            class="ms-4 ps-2"
+                          >
+                            Check availability of Delivery in your location
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row pb-3 card-border">
+                        <div class="col">
+                          <div class="d-flex align-items-center">
+                            <i class="me-2 ri-refresh-line h3"></i>
+                            <span>Return Delivery</span>
+                          </div>
+                          <p class="ms-4 ps-2">Free 30 Days Return</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="card-text">
+                    <small class="text-body-secondary"
+                      >Last updated 3 mins ago</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb">
+          <div class="related-items">
+            <div class="custom-hr"></div>
+            <h6>Related Items</h6>
+          </div>
+
+
+          
+          <app-product-carousel
+            [numberOfSlides]="RelatedProducts"
+          ></app-product-carousel>
+        </div>
+
+
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+</ng-template>

@@ -1,0 +1,194 @@
+<p-toast></p-toast>
+
+<div *ngIf="deleteClicked" class="overlay">
+  <div class="modal-container">
+    <h4 class="modal-heading">Alert!</h4>
+    <p>Do you really want to delete Item ?</p>
+    <div class="buttons">
+      <button class="btn btn-success" (click)="ConfirmationClicked('close')">
+        Close
+      </button>
+      <button class="btn btn-danger" (click)="ConfirmationClicked('delete')">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="custom-toast-container"></div>
+<div class="content">
+  <div class="">
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-between">
+        <div class="col-md-12">
+          <div class="table-height">
+            <h2>Products</h2>
+
+            <table class="table">
+              <thead>
+                <tr class="box-style">
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="cartItems.length == 0">
+                  <td colspan="4" class="no-item">No items in cart</td>
+                </tr>
+                <tr *ngFor="let product of cartItems" class="box-style">
+                  <td>
+                    <img
+                      src="{{ product.image }}"
+                      alt="{{ product.name }}"
+                      style="width: 40px; height: 40px"
+                      class="me-2"
+                    />
+                    {{ product.name }}
+                  </td>
+                  <td>${{ product.price }}</td>
+                  <td>
+                    <input
+                      type="number"
+                      min="1"
+                      [(ngModel)]="product.quantity"
+                      class="form-control form-control-sm quantity-input"
+                      style="width: 80px"
+                      (ngModelChange)="calculateSubtotal(); calculateTotal()"
+                    />
+                  </td>
+                  <td id="{{ product.productId }}Subtotal">
+                    ${{ calculateSingleProductTotal(product.price,product.quantity) }}
+                  </td>
+                  <td>
+                    <i
+                      (click)="onCheckDeleteCart(product.productId)"
+                      class="fa-solid fa-trash"
+                    ></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 d-flex justify-content-between mt-4">
+              <div class="col-xs-6">
+                <a class="btn btn-secondary" [routerLink]="['']"
+                  >Return To Shop</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="container mt-4">
+            <div class="row">
+              <!-- Column for Coupon Code input and button -->
+              <div class="col-md-6 d-flex align-items-start p-0">
+                <div class="d-flex align-items-center mb-3">
+                  <input
+                    [(ngModel)]="coupon"
+                    type="text"
+                    class="form-control me-2"
+                    id="couponCode"
+                    placeholder="Coupon Code"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    style="white-space: nowrap"
+                    (click)="onApplyCoupon()"
+                  >
+                    Apply Coupon
+                  </button>
+                </div>
+              </div>
+
+              <!-- Column for the checkout card -->
+              <div class="col-md-6">
+                <div class="checkout-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row mb-3">
+                        <label for="subtotal" class="col-sm-3 col-form-label">
+                          <strong>Cart Total</strong>
+                        </label>
+                        <div class="col-sm-9"></div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="subtotal" class="col-sm-3 col-form-label">
+                          Subtotal
+                        </label>
+                        <div class="col-sm-9">
+                          <span id="subtotal">{{
+                            subtotalAmount
+                          }}$</span>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label for="shipping" class="col-sm-3 col-form-label">
+                          Shipping
+                        </label>
+                        <div class="col-sm-9">
+                          <span id="shipping">
+                            <span *ngIf="shippingCharge && subtotalAmount">{{
+                              shippingCharge
+                            }}$</span>
+                            <span *ngIf="shippingCharge && !subtotalAmount"
+                              >$0.00</span
+                            >
+                            <span *ngIf="!shippingCharge && subtotalAmount"
+                              >Free</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="discount" class="row mb-3">
+                        <label for="subtotal" class="col-sm-3 col-form-label">
+                          Discount
+                        </label>
+                        <div class="col-sm-9">
+                          <span id="subtotal">{{ discount }}$</span>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="total" class="col-sm-3 col-form-label">
+                          Total
+                        </label>
+                        <div class="col-sm-9">
+                          <span id="total">{{ totalAmount  }}$</span>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button
+                          type="button"
+                          class="btn btn-primary w-50"
+                          (click)="onCheckout()"
+                        >
+                          Proceed to Checkout
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 coupon-error">
+                <span *ngIf="invalidCouponError">invalid Coupon!</span>
+                <span *ngIf="usedCouponError">Coupon Already Used!</span>
+                <span *ngIf="invalidTotalError"
+                  >Please select more item for getting Discount!</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>

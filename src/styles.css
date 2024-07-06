@@ -1,0 +1,25 @@
+:root {
+  --button-color: #d74048;
+  --button-color-hover: #a12c32;
+}
+
+* {
+  box-sizing: border-box;
+
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100%;
+  margin-top: 110px;
+}
+
+
+@media (max-width: 767px)
+{
+body{
+  margin-top: 150px;
+}
+}

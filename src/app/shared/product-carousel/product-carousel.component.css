@@ -1,0 +1,109 @@
+.card {
+  border: none;
+}
+
+.carouselExampleControls,
+.carousel-inner,
+.carousel-item
+.card-group{
+  width: 99.5%;
+  position: relative;
+
+}
+
+.card-wrapper {
+  display: flex !important;
+   margin: 5%; 
+  flex-wrap: wrap !important;
+  justify-content: space-around !important;;
+  align-items: center !important;;
+  width: 100px;
+  box-shadow: none;
+  /* gap: 50px; */
+}
+
+.card-group{
+  /* width: 95%; */
+  /* background-color: green; */
+  margin:0px
+}
+
+.custom-control-prev,
+.custom-control-next {
+  position: absolute;
+  top: -7%;
+  width: 5%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transform: translateY(-50%);
+  z-index: 50;
+}
+
+.custom-control-prev {
+  left: 83%;
+}
+
+.custom-control-next {
+  right: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 0.5rem;
+  height: 2.1rem;
+  color: black;
+}
+
+@media (max-width: 1330px) {
+  .card-wrapper {
+    flex: 1 1 20%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .card-wrapper {
+    flex: 1 1 100%;
+  }
+
+  .custom-control-prev,
+  .custom-control-next {
+    top: -6%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-wrapper {
+    flex: 1 1 100%;
+  }
+
+  .card-group {
+   /* background-color: green; */
+   flex: 1 1 96%;
+   height: 340px;
+  }
+
+  .custom-control-prev,
+  .custom-control-next {
+    top: -10%;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+ 
+  .card-wrapper {
+    margin-left: 3%;
+  }
+}
+
+@media (max-width: 380px) {
+  .card-wrapper {
+    margin-left: 3%;
+  }
+}
+
+

@@ -1,0 +1,30 @@
+<ng-container class="loader" *ngIf="isLoading; else homeComponent">
+  <app-loading-spinner></app-loading-spinner>
+</ng-container>
+
+<ng-template #homeComponent>
+  <div class="tittle-section" *ngIf="inShow_All">
+    <div class="day">
+      <div class="box"></div>
+      <p>This Month</p>
+    </div>
+    <div class="tittle-bar-forTop-rated">
+      <div class="Tittle">Top Rated Products</div>
+    </div>
+  </div>
+  
+
+  <div class="containerr card-grouppp card-wrapper">
+    <ng-container *ngIf="singleProduct; else otherWise">
+      <div class="class-wrap">
+        <app-card class="card" [cardInfo]="singleProduct"></app-card>
+      </div>
+    </ng-container>
+
+    <ng-template #otherWise>
+      <div *ngFor="let product of products" class="class-wrap">
+        <app-card class="card" [cardInfo]="product"></app-card>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>

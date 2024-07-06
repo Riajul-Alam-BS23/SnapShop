@@ -1,0 +1,91 @@
+<p-toast></p-toast>
+<div class="fullLoginPage">
+  <div class="imageSectionloginPage">
+    <img src="./assets/shopping-image.png" />
+  </div>
+
+  <div class="LoginForm">
+    <div class="form-class">
+      <h2>Log in to SnapShop</h2>
+      <p>Enter your details below</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          formControlName="username"
+          required
+        />
+        <span
+          *ngIf="
+            (username.touched || username.dirty) &&
+            username.hasError('required')
+          "
+          class="text-danger"
+        >
+          Username is required*
+        </span>
+        <span
+          *ngIf="
+            (username.touched || username.dirty) &&
+            username.hasError('minlength')
+          "
+          class="text-danger"
+        >
+          Username must be at least 3 characters
+        </span>
+
+        <div class="password">
+          <input
+            [type]="passwordFieldType"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <i
+            class="toggle-password fas"
+            [ngClass]="
+              passwordFieldType === 'password'
+                ? 'ri-eye-off-line'
+                : 'ri-eye-line'
+            "
+            (click)="togglePasswordVisibility()"
+          ></i>
+        </div>
+
+        <span
+          *ngIf="
+            (password.touched || password.dirty) &&
+            password.hasError('required')
+          "
+          class="text-danger"
+        >
+          Password is required*
+        </span>
+        <span
+          *ngIf="
+            (password.touched || password.dirty) &&
+            password.hasError('minlength')
+          "
+          class="text-danger"
+        >
+          Password must be at least 5 characters
+        </span>
+
+        <div class="button-group">
+          <button class="btn" type="submit" [disabled]="!loginForm.valid">
+            Log In
+          </button>
+          <div class="forgot">
+            <p style="color: var(--button-color)">
+              Don't have account?<a routerLink="/sign-up" class="signUp"
+                ><span>sign Up</span></a
+              >
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

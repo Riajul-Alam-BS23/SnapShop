@@ -1,0 +1,158 @@
+<nav class="navigation">
+  <div class="topBlackNav">
+    <div class="leftTextTopbar"></div>
+    <div class="middleTextTopbar">
+      <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!</p>
+      <a class="font-weight-bold"
+        >ShopNow</a
+      >
+    </div>
+    <div class="languageTopbar">
+      <a>English <i class="ri-arrow-right-s-line"></i></a>
+    </div>
+  </div>
+</nav>
+
+ 
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
+  <div class="container">
+    <a
+      class="navbar-brand d-flex justify-content-around align-items-center order-lg-0"
+    >
+      <img src="./assets/images/shopping-bag-icon.png" alt="site icon" class="logo-image"/>
+      <span class="fw-lighter ms-2" (click)="homeClick()">SnapShop</span>
+    </a>
+
+    <div class="order-lg-2 nav-btns">
+      <button type="button" class="btn position-relative icon Search">
+        <div class="search-container" >
+          <div
+            class="input-group searchgroup"
+            [ngClass]="{ expanded: isSearchExpanded }"
+            
+          >
+            <input
+              type="text"
+              class="form-control"
+              (click)="expandSearch()"
+             
+              [(ngModel)]="searchText"
+              (input)="onSearch($event)"
+              (keypress)="onKeyPress($event)"
+              placeholder="Search .."
+            />
+            <span class="input-group-text search-icon">
+              <i class="fa fa-search"></i>
+            </span>
+            <ul class="list-group suggestions" *ngIf="filteredItems.length > 0">
+              <li
+                *ngFor="let item of filteredItems"
+                class="list-group-item d-flex align-items-center justify-content-between"
+              >
+                <a
+                  *ngIf="isProduct(item)"
+                  [routerLink]="['product-list']"
+                  [queryParams]="{ paramName: item.id }"
+                  (click)="clearSearch()"
+                  class="text-decoration-none text-dark w-100 d-flex align-items-center"
+                >
+                  <img
+                    [src]="item.image"
+                    alt=""
+                    class="img-thumbnail"
+                    width="40px"
+                    height="30px"
+                  />
+                  <div class="ms-3 me-auto">
+                    <div class="fw-bold">
+                      {{ item.title | slice : 0 : 20 }}...
+                    </div>
+                    <div class="text-muted">{{ item.price }}$</div>
+                  </div>
+                </a>
+                <a
+                  *ngIf="isCategory(item)"
+                  [routerLink]="['product-list']"
+                  [queryParams]="{ Category: item }"
+                  (click)="clearSearch()"
+                  class="text-decoration-none d-block py-2 px-3 text-dark"
+                >
+                  {{ item }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </button>
+
+      <button
+        type="button"
+        class="btn position-relative shoppingIcon"
+        (click)="addToCart()"
+      >
+        <i class="ri-shopping-cart-2-line"></i>
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge bg-primary"
+          *ngIf="isLoggedIn"
+          >{{ currentCartItem }}</span
+        >
+      </button>
+      <button
+        type="button"
+        class="btn position-relative shoppingIcon"
+        routerLink="/profile"
+        routerLinkActive="active"
+        *ngIf="isLoggedIn"
+      >
+        <i class="ri-user-3-line"></i>
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="logout()"
+        *ngIf="isLoggedIn; else login"
+      >
+        log out
+      </button>
+      <ng-template #login>
+        <button class="btn btn-primary" (click)="logIn()">log In</button>
+      </ng-template>
+    </div>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      (click)="toggleNavMenu()"
+      data-bs-target="#navMenu"
+    >
+      <i class="ri-menu-3-line"></i>
+    </button>
+
+    <div
+      class="collapse navbar-collapse order-lg-1"
+      id="navMenu"
+      [class.collapse]="isCollapsed"
+    >
+      <ul class="navbar-nav mx-auto text-center">
+        <li
+          class="nav-item px-2 py-2"
+          *ngFor="let nav of headerText; let i = index"
+        >
+          <a
+            class="nav-link text-dark"
+            *ngIf="nav.name !== 'login' || !isLoggedIn"
+            [routerLink]="
+              nav.name === 'Products'
+                ? '/product-list'
+                : '/' + nav.name.toLowerCase()
+            "
+            routerLinkActive="active"
+          >
+            {{ nav.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+

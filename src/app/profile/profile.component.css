@@ -1,0 +1,229 @@
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.breadcrumb {
+  margin-bottom: 10px;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+.breadcrumb a {
+  color: #000;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.welcome-message {
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 14px; /* Adjust welcome message font size */
+}
+
+.username {
+  color: #dc3545;
+}
+
+.content {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  margin-right: 20px;
+}
+
+.sidebar h3 {
+  margin-bottom: 10px;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px; /* Adjust sidebar header font size */
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-size: 12px; /* Adjust sidebar menu font size */
+}
+
+.sidebar-menu li {
+  padding: 10px;
+  cursor: pointer;
+  color: #535252;
+  margin-left: 15px;
+  font-size: 14px;
+}
+
+.sidebar-menu li.active {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.sidebar-menu li:hover {
+  text-decoration: underline;
+}
+
+.profile-content {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 14px; /* Adjust profile content font size */
+}
+
+.profile-content h3 {
+  color: #dc3545;
+  margin-bottom: 20px;
+  font-size: 15px; /* Adjust profile content header font size */
+}
+.profile-content h4 {
+  color: #000000;
+  font-size: 17px;
+}
+.form-row {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 12px; /* Adjust form label font size */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  font-size: 14px; /* Adjust form input font size */
+  background: #f4f4f4;
+  color: #999;
+}
+
+.form-row.buttons {
+  justify-content: flex-end;
+}
+
+.form-group.full-width {
+  flex: 1 1 100%;
+}
+
+.form-group.full-width input[type="password"] {
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Adjust button font size */
+}
+
+.btn-cancel {
+  background-color: #ffffff;
+  color: rgb(5, 0, 0);
+  margin-right: 10px;
+}
+
+.btn-save {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* new */
+
+/* For WebKit browsers (Chrome, Safari) */
+.scrollable-list::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+}
+
+.scrollable-list::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar thumb color */
+  border-radius: 10px; /* Scrollbar thumb border radius */
+}
+
+.scrollable-list::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Scrollbar thumb color on hover */
+}
+
+/* For Firefox */
+.scrollable-list {
+  scrollbar-width: thin; /* Scrollbar width */
+  scrollbar-color: #888 #f1f1f1; /* Scrollbar thumb and track color */
+}
+
+/* General styles */
+.addressBook-content {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  min-width: 80vw;
+  padding: 20px;
+}
+
+.order-info-header {
+  color: #007bff; /* Bootstrap primary color */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+
+.scrollable-list {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 15px; /* Add some padding for scrollbar */
+}
+
+.card {
+  background-color: #e9ecef; /* Light gray background */
+  border: 1px solid #007bff; /* Bootstrap primary border color */
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.list-group-item {
+  background-color: transparent; /* Transparent background for list items */
+  border: none; /* Remove borders from list items */
+}
+
+.list-group-item strong {
+  color: #343a40; /* Dark color for strong text */
+}
+
+.badge {
+  font-size: 0.9rem;
+}
+
+/* Media query for larger screens */
+@media (min-width: 992px) {
+  .addressBook-content {
+    min-height: 80vh; /* Adjust height for larger screens */
+  }
+
+  .scrollable-list {
+    max-height: 60vh; /* Adjust scrollable list height for larger screens */
+  }
+}

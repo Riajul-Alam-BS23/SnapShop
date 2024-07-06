@@ -1,0 +1,84 @@
+.text-dark a {
+  color: inherit;
+}
+
+.text-dark a:hover {
+  color: #007bff;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+}
+.breadcrumb a {
+  text-decoration: none;
+  color: #333;
+}
+
+.breadcrumb span {
+  color: #888;
+}
+
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.pagination-dots .dot {
+  height: 12px;
+  width: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.pagination-dots .dot.active {
+  background-color: #333;
+}
+
+.p-3.border {
+  transition: background-color 0.3s;
+}
+
+.p-3.border:hover {
+  background-color: var(--button-color);
+}
+
+.p-3.border:hover h3,
+.p-3.border:hover p {
+  color: #fff;
+}
+.p-3.border.square {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.p-3.border.square:hover .fas {
+  color: #fff;
+}
+
+.p-3.border.square h3,
+.p-3.border.square p {
+  margin-bottom: 0;
+}
+.img-fluid {
+  max-width: 85%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.row.mb-5 h1 {
+  margin-top: 45px;
+  margin-bottom: 30px;
+}
